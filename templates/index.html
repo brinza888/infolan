@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Brinza OpenVPN Server</title>
+    <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <h1 class="display-1">Welcome on vpn.ilbz.ru</h1>
+
+        <div class="container">
+            <hr>
+            <h2>Server information</h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>External IP</td>
+                        <td>185.70.187.114</td>
+                    </tr>
+                    <tr>
+                        <td>Your private IP</td>
+                        <td>10.8.0.2</td>
+                    </tr>
+                    <tr>
+                        <td>Primary DNS</td>
+                        <td>10.8.0.1</td>
+                    </tr>
+                    <tr>
+                        <td>Connectivity test</td>
+                        <td id="onlineStatus">N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <hr>
+            <h2>Resources availability</h2>
+            <table class="table" id="resourcesStatus">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Status</th>
+                        <th class="d-none d-sm-table-cell">Domain</th>
+                        <th class="d-none d-sm-table-cell">Resolved IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static', filename='info.js')}}"></script>
+</body>
+</html>
