@@ -13,13 +13,17 @@ def get_external_ip():
         return "N/A"
 
 
-load_dotenv(".env")
+load_dotenv()
 
 
 class Config:
     # Flask config
     DEBUG = bool(int(os.getenv("DEBUG", 0)))
     SERVER_NAME = os.getenv("SERVER_NAME")
+
+    # page settings
+    PAGE_VPN_NAME = os.getenv("PAGE_VPN_NAME", "default_name")
+    PAGE_TITLE = os.getenv("PAGE_TITLE", PAGE_VPN_NAME)
 
     # vpn depended settings
     SERVER_PRIMARY_DNS = os.getenv("SERVER_PRIMARY_DNS", "N/A")
@@ -45,5 +49,6 @@ def index():
 
 
 if __name__ == '__main__':
+    print(app.config["PAGE_VPN_NAME"])
     app.run("0.0.0.0", 5000, debug=True)
 

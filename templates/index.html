@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brinza OpenVPN Server</title>
-    <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+    <title>{{ config["PAGE_TITLE"] }}</title>
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid text-center">
-        <h1 class="display-1">Welcome on vpn.ilbz.ru</h1>
+        <h1 class="display-1">Welcome on {{ config["PAGE_VPN_NAME"] }}</h1>
 
         <div class="container">
             <hr>
@@ -17,15 +17,15 @@
                 <tbody>
                     <tr>
                         <td>External IP</td>
-                        <td>{{server_ip}}</td>
+                        <td>{{ server_ip }}</td>
                     </tr>
                     <tr>
                         <td>Your private IP</td>
-                        <td>{{client_ip}}</td>
+                        <td>{{ client_ip }}</td>
                     </tr>
                     <tr>
                         <td>Primary DNS</td>
-                        <td>{{primary_dns}}</td>
+                        <td>{{ primary_dns }}</td>
                     </tr>
                     <tr>
                         <td>Connectivity test</td>
