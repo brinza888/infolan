@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,10 +9,10 @@
 <body>
     <div class="container-fluid text-center">
         <h1 class="display-1">Welcome on {{ config["PAGE_VPN_NAME"] }}</h1>
+        <hr>
 
         <div class="container">
-            <hr>
-            <h2>Server information</h2>
+            <h2>Server status</h2>
             <table class="table">
                 <tbody>
                     <tr>
@@ -36,7 +36,6 @@
         </div>
 
         <div class="container">
-            <hr>
             <h2>Resources availability</h2>
             <table class="table" id="resourcesStatus">
                 <thead>
