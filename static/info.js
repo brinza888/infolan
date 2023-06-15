@@ -6,6 +6,21 @@ var resources = [
     ["YouTube", "youtube.com"],
 ]
 
+async function dnsCheck(domain) {
+    var status = false;
+    try {
+        var response = await fetch(`https://dns.google/resolve?name=${res[1]}`);
+        var json = await response.json();
+        if (json["Status"] === 0) {
+            return json["Answer"][0]["data"];
+        } else {
+            return undefined;
+        }
+    } catch (e) {
+        return undefined;
+    }
+}
+
 window.addEventListener("DOMContentLoaded", (event) => load());
 
 async function load() {
@@ -21,36 +36,22 @@ async function load() {
         var resName = res[0];
         var resDomain = res[1];
 
-        var status = false;
-
-        try {
-            var response = await fetch(`https://dns.google/resolve?name=${res[1]}`);
-            var json = await response.json();
-            if (json["Status"] == 0) {
-                status = true;
-            }
-        }
-        catch (e) {
+        var dnsStatus = "\u274C (N/A)";
+        var resolvedIP = await dnsCheck(resDomain);
+        if (resolvedIP !== undefined) {
+            dnsStatus = "\u2705 (OK)";
+        } else {
+            resolvedIP = "N/A";
         }
 
-        var statusText = "\u274C (N/A)";
-        var resolvedIP = "N/A";
-        
-        if (status) {
-            statusText = "\u2705 (OK)";
-            resolvedIP = json["Answer"][0]["data"];
-        }
-
-        var newRow = tbodyRef.insertRow();
-        newRow.insertCell().appendChild(document.createTextNode(resName));
-        newRow.insertCell().appendChild(document.createTextNode(statusText));
-        var rdCell = newRow.insertCell();
-        rdCell.appendChild(document.createTextNode(resDomain));
-        rdCell.classList.add("d-none");
-        rdCell.classList.add("d-sm-table-cell");
-        var rIPCell = newRow.insertCell();
-        rIPCell.appendChild(document.createTextNode(resolvedIP));
-        rIPCell.classList.add("d-none");
-        rIPCell.classList.add("d-sm-table-cell");
+        var row = tbodyRef.insertRow();
+        row.insertCell().appendChild(document.createTextNode(resName));
+        row.insertCell().appendChild(document.createTextNode(dnsStatus));
+        var domainCell = row.insertCell();
+        domainCell.appendChild(document.createTextNode(resDomain));
+        domainCell.classList.add("d-none", "d-sm-table-cell");
+        var IPCell = row.insertCell();
+        IPCell.appendChild(document.createTextNode(resolvedIP));
+        IPCell.classList.add("d-none", "d-sm-table-cell");
     }
 }
